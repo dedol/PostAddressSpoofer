@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<title>Post Address Spoofer</title>
+	<link rel="icon" type="image/png" href="favicon.png">
+	<link rel="stylesheet" href="css/uikit.css" />
+	<script src="js/uikit.min.js"></script>
+	<script src="js/uikit-icons.min.js"></script>
+	<script src="js/script.js" type="text/javascript"></script>
+	<!-- Yandex.Metrika counter -->
+	<script type="text/javascript" >
+	   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+	   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+	   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+	   ym(66656449, "init", {
+			clickmap:true,
+			trackLinks:true,
+			accurateTrackBounce:true
+	   });
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/66656449" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+<nav class="uk-navbar-container uk-margin" uk-navbar>
+    <div class="uk-navbar-left">
+        <a class="uk-navbar-item uk-logo uk-margin-small-left" href="#">Post Address Spoofer (beta)</a>
+    </div>
+	
+	<div class="uk-navbar-right">
+		<div class="uk-navbar-item">
+			<button class="uk-button uk-button-default uk-button-medium" onclick="window.open('https://github.com/dedol/PostAddressSpoofer');">
+				<!-- <span uk-icon="icon: star"></span>  -->
+				GitHub
+			</button>
+        </div>
+	
+		<div class="uk-navbar-item">
+			<button class="uk-button uk-button-default uk-button-medium" onclick="window.open('https://miped.ru/f/');">
+				<!-- <span uk-icon="icon: git-fork"></span>  -->
+				Miped
+			</button>
+        </div>
+		
+		<div class="uk-navbar-item">
+			<button class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #donate">
+				<!-- <span uk-icon="icon: credit-card"></span>  -->
+				Поддержать
+			</button>
+		</div>
+	</div>
+</nav>
+
+<div class="uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid>
+    <div align="center">
+        <table border=0>
+		<tr>
+			<td class="uk-table-shrink"></td>
+			<td class="uk-table-shrink" align="center">Значение</td>
+			<td class="uk-table-shrink" align="center">Уникальность</td>
+		</tr>
+		<tr>
+			<td class="uk-table-shrink"><div class="uk-margin-small-left uk-margin-small-right">Фамилия:</div></td>
+			<td class="uk-table-shrink"><input class="uk-input uk-form-width-small uk-form-small" id="lastname" type="text" value="Пушкин"></td>
+			<td class="uk-table-shrink">
+				<select class="uk-select uk-form-small" id="lastname_distance">
+					<option value="1">Низкая</option>
+					<option value="2" selected>Средняя</option>
+					<option value="3">Высокая</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="uk-table-shrink"><div class="uk-margin-small-left uk-margin-small-right">Имя:</div></td>
+			<td class="uk-table-shrink"><input class="uk-input uk-form-width-small uk-form-small" id="firstname" type="text" value="Александр"></td>
+			<td class="uk-table-shrink">
+				<select class="uk-select uk-form-small" id="firstname_distance">
+					<option value="1">Низкая</option>
+					<option value="2" selected>Средняя</option>
+					<option value="3">Высокая</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="uk-table-shrink"><div class="uk-margin-small-left uk-margin-small-right">Отчество:</div></td>
+			<td class="uk-table-shrink"><input class="uk-input uk-form-width-small uk-form-small" id="middlename" type="text" value="Сергеевич"></td>
+			<td class="uk-table-shrink">
+				<select class="uk-select uk-form-small" id="middlename_distance">
+					<option value="1">Низкая</option>
+					<option value="2" selected>Средняя</option>
+					<option value="3">Высокая</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3" class="uk-table-shrink">
+				<div class="uk-margin-small-left uk-margin-small-right">
+					<label><input class="uk-checkbox" type="checkbox" id="disable_middlename"> Не использовать отчество</label>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3" class="uk-table-shrink">
+				<div class="uk-margin-small-left uk-margin-small-right">
+					<label><input class="uk-checkbox" type="checkbox" id="disable_mix"> Не перемешивать порядок</label>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3" class="uk-table-shrink">
+				<div class="uk-margin-small-left uk-margin-small-right">
+					<label><input class="uk-checkbox" type="checkbox" id="is_title"> Первые буквы заглавные</label>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3" class="uk-table-shrink" align="center">
+				<div class="uk-margin-small-left uk-margin-small-right uk-margin-small-top uk-margin-small-bottom">
+					<button class="uk-button uk-button-primary uk-button-small" OnClick="generate_name();">Генерировать</button>
+				</div>
+			</td>
+		</tr>
+		</table>
+		<div class="uk-margin-small-left uk-margin-small-right">
+			<textarea class="uk-textarea" rows="10" cols="45" name="text" id="result_name"></textarea>
+		</div>
+    </div>
+	
+    <div align="center">
+        <table border=0>
+		<tr>
+			<td class="uk-table-shrink"></td>
+			<td class="uk-table-shrink" align="center">Значение</td>
+			<td class="uk-table-shrink" align="center">Уникальность</td>
+		</tr>
+		<tr>
+			<td class="uk-table-shrink"><div class="uk-margin-small-left uk-margin-small-right">Улица:</div></td>
+			<td class="uk-table-shrink"><input class="uk-input uk-form-width-small uk-form-small" id="streetname" type="text" value="Пушкина"></td>
+			<td class="uk-table-shrink">
+				<select class="uk-select uk-form-small" id="streetname_distance">
+					<option value="1">Низкая</option>
+					<option value="2" selected>Средняя</option>
+					<option value="3">Высокая</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="uk-table-shrink"><div class="uk-margin-small-left uk-margin-small-right">Дом:</div></td>
+			<td class="uk-table-shrink"><input class="uk-input uk-form-width-small uk-form-small" id="house_number" type="text" value="12/2"></td>
+			<td class="uk-table-shrink"></td>
+		</tr>
+		<tr>			
+			<td class="uk-table-shrink"><div class="uk-margin-small-left uk-margin-small-right">Квартира:</div></td>
+			<td class="uk-table-shrink"><input class="uk-input uk-form-width-small uk-form-small" id="apartment_number" type="text" value="88"></td>
+			<td class="uk-table-shrink"></td>
+		</tr>
+		<tr>
+			<td colspan="3" class="uk-table-shrink">
+				<div class="uk-margin-small-left uk-margin-small-right">
+					<label><input class="uk-checkbox" type="checkbox" id="disable_apartment"> Не использовать квартиру</label>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3" class="uk-table-shrink">
+				<div class="uk-margin-small-left uk-margin-small-right">
+					<label><input class="uk-checkbox" type="checkbox" id="is_title_street"> Улица с заглавной буквы</label>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3" class="uk-table-shrink">
+				<div class="uk-margin-small-left uk-margin-small-right">
+					<label><input class="uk-checkbox" type="checkbox" id="disable_separators"> Не использовать разделители</label>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3" class="uk-table-shrink" align="center">
+				<div class="uk-margin-small-left uk-margin-small-right uk-margin-small-top uk-margin-small-bottom">
+					<button class="uk-button uk-button-primary uk-button-small" OnClick="generate_address();">Генерировать</button>
+				</div>
+			</td>
+		</tr>
+		</table>
+		<div class="uk-margin-small-left">
+			<textarea class="uk-textarea" rows="10" cols="45" name="text" id="result_address"></textarea>
+		</div>
+    </div>
+    <div>
+		<div class="uk-margin-small-left uk-margin-small-right uk-margin-small-top uk-margin-small-bottom">
+			<b>Настройки словаря:</b>
+		</div>
+		<div id="alph_settings" style="display: block;">
+			<div class="uk-margin-small-left uk-margin-small-right uk-margin-small-top uk-margin-small-bottom">
+				<button class="uk-button uk-button-primary uk-button-small" OnClick="create_file_input();">Открыть</button>
+				<button class="uk-button uk-button-primary uk-button-small" OnClick="save_settings_file();">Сохранить</button>
+			</div>
+			
+			<table>
+				<tr>
+					<td colspan="2">
+						<div class="uk-margin-small-left uk-margin-small-right"><b>Настройка префиксов:</b></div>
+					</td></tr>
+				<tr>
+					<td>
+						<div class="uk-margin-small-left uk-margin-small-right">Улица:</div>
+					</td>
+					<td>
+						<input class="uk-input uk-form-width-medium uk-form-small" id="street_prefixes" type="text" value='"ul", "street", "yl", "st", "ulitca"'>
+					</td>
+				</tr>
+				<tr>
+					<td><div class="uk-margin-small-left uk-margin-small-right">Дом:</div></td>
+					<td>
+						<input class="uk-input uk-form-width-medium uk-form-small" id="house_prefixes" type="text" value='"dom", "house", "d", ""'>
+					</td>
+				</tr>
+				<tr>
+					<td><div class="uk-margin-small-left uk-margin-small-right">Квартира:</div></td>
+					<td>
+						<input class="uk-input uk-form-width-medium uk-form-small" id="apartment_prefixes" type="text" value='"kv", "k", "kvartira", ""'>
+					</td>
+				</tr>
+				<tr>
+					<td><div class="uk-margin-small-left uk-margin-small-right">Разделители:</div></td>
+					<td>
+						<input class="uk-input uk-form-width-medium uk-form-small" id="separators" type="text" value='"{comma}"'>
+					</td>
+				</tr>
+			</table>
+
+			<table style="white-space: nowrap;">
+				<tr>
+					<td colspan="1">
+						<div class="uk-margin-small-left uk-margin-small-right uk-margin-small-top"><b>Настройка алфавита:</b></div>
+					</td>
+				</tr>
+				<tr><td>
+					<div class="uk-margin-small-left uk-margin-small-right uk-margin-small-bottom" >
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="а" style="text-align:center;" disabled>
+						<input id="let_ru_1" type="text" class="uk-input uk-form-width-small uk-form-small" value='"a"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="б" style="text-align:center;" disabled>
+						<input id="let_ru_2" type="text" class="uk-input uk-form-width-small uk-form-small" value='"b", "6"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="в" style="text-align:center;" disabled>
+						<input id="let_ru_3" type="text" class="uk-input uk-form-width-small uk-form-small" value='"v", "w", "vv", "u"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="г" style="text-align:center;" disabled>
+						<input id="let_ru_4" type="text" class="uk-input uk-form-width-small uk-form-small" value='"g", "j"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="д" style="text-align:center;" disabled>
+						<input id="let_ru_5" type="text" class="uk-input uk-form-width-small uk-form-small" value='"d"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="е" style="text-align:center;" disabled>
+						<input id="let_ru_6" type="text" class="uk-input uk-form-width-small uk-form-small" value='"e", "ye"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="ё" style="text-align:center;" disabled>
+						<input id="let_ru_7" type="text" class="uk-input uk-form-width-small uk-form-small" value='"e", "yo", "jo"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="ж" style="text-align:center;" disabled>
+						<input id="let_ru_8" type="text" class="uk-input uk-form-width-small uk-form-small" value='"zh", "j", "z"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="з" style="text-align:center;" disabled>
+						<input id="let_ru_9" type="text" class="uk-input uk-form-width-small uk-form-small" value='"z", "zz"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="и" style="text-align:center;" disabled>
+						<input id="let_ru_10" type="text" class="uk-input uk-form-width-small uk-form-small" value='"i", "yi"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="й" style="text-align:center;" disabled>
+						<input id="let_ru_11" type="text" class="uk-input uk-form-width-small uk-form-small" value='"y", "i", "yi", "j", "jj", "ii"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="к" style="text-align:center;" disabled>
+						<input id="let_ru_12" type="text" class="uk-input uk-form-width-small uk-form-small" value='"k", "c"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="л" style="text-align:center;" disabled>
+						<input id="let_ru_13" type="text" class="uk-input uk-form-width-small uk-form-small" value='"l", "I"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="м" style="text-align:center;" disabled>
+						<input id="let_ru_14" type="text" class="uk-input uk-form-width-small uk-form-small" value='"m", "rn", "nn"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="н" style="text-align:center;" disabled>
+						<input id="let_ru_15" type="text" class="uk-input uk-form-width-small uk-form-small" value='"n"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="о" style="text-align:center;" disabled>
+						<input id="let_ru_16" type="text" class="uk-input uk-form-width-small uk-form-small" value='"o", "0"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="п" style="text-align:center;" disabled>
+						<input id="let_ru_17" type="text" class="uk-input uk-form-width-small uk-form-small" value='"p"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="р" style="text-align:center;" disabled>
+						<input id="let_ru_18" type="text" class="uk-input uk-form-width-small uk-form-small" value='"r"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="с" style="text-align:center;" disabled>
+						<input id="let_ru_19" type="text" class="uk-input uk-form-width-small uk-form-small" value='"s", "$", "5"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="т" style="text-align:center;" disabled>
+						<input id="let_ru_20" type="text" class="uk-input uk-form-width-small uk-form-small" value='"t"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="у" style="text-align:center;" disabled>
+						<input id="let_ru_21" type="text" class="uk-input uk-form-width-small uk-form-small" value='"u", "y", "yu"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="ф" style="text-align:center;" disabled>
+						<input id="let_ru_22" type="text" class="uk-input uk-form-width-small uk-form-small" value='"f", "ph"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="х" style="text-align:center;" disabled>
+						<input id="let_ru_23" type="text" class="uk-input uk-form-width-small uk-form-small" value='"kh", "x", "h"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="ц" style="text-align:center;" disabled>
+						<input id="let_ru_24" type="text" class="uk-input uk-form-width-small uk-form-small" value='"ts", "c", "tc", "cz", "cc"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="ч" style="text-align:center;" disabled>
+						<input id="let_ru_25" type="text" class="uk-input uk-form-width-small uk-form-small" value='"ch", "c"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="ш" style="text-align:center;" disabled>
+						<input id="let_ru_26" type="text" class="uk-input uk-form-width-small uk-form-small" value='"sh", "s", "h"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="щ" style="text-align:center;" disabled>
+						<input id="let_ru_27" type="text" class="uk-input uk-form-width-small uk-form-small" value='"shch", "shh", "sh", "sc"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="ъ" style="text-align:center;" disabled>
+						<input id="let_ru_28" type="text" class="uk-input uk-form-width-small uk-form-small" value='"&#39", ""'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="ы" style="text-align:center;" disabled>
+						<input id="let_ru_29" type="text" class="uk-input uk-form-width-small uk-form-small" value='"y", "i"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="ь" style="text-align:center;" disabled>
+						<input id="let_ru_30" type="text" class="uk-input uk-form-width-small uk-form-small" value='""'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="э" style="text-align:center;" disabled>
+						<input id="let_ru_31" type="text" class="uk-input uk-form-width-small uk-form-small" value='"eh", "e"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="ю" style="text-align:center;" disabled>
+						<input id="let_ru_32" type="text" class="uk-input uk-form-width-small uk-form-small" value='"yu", "u", "ju", "iu"'><br>
+						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="я" style="text-align:center;" disabled>
+						<input id="let_ru_33" type="text" class="uk-input uk-form-width-small uk-form-small" value='"ya", "ja", "ia", "a"'><br>
+					</div>
+				</td>
+				<td valign="top">
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="a" style="text-align:center;" disabled>
+					<input id="let_en_1" type="text" class="uk-input uk-form-width-small uk-form-small" value='"a"'><br>
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="b" style="text-align:center;" disabled>
+					<input id="let_en_2" type="text" class="uk-input uk-form-width-small uk-form-small" value='"b", "6"'><br>
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="c" style="text-align:center;" disabled>
+					<input id="let_en_3" type="text" class="uk-input uk-form-width-small uk-form-small" value='"c", "s", "$", "5"'><br>
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="d" style="text-align:center;" disabled>
+					<input id="let_en_4" type="text" class="uk-input uk-form-width-small uk-form-small" value='"d"'><br>
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="e" style="text-align:center;" disabled>
+					<input id="let_en_5" type="text" class="uk-input uk-form-width-small uk-form-small" value='"e", "ye", "je"'><br>
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="f" style="text-align:center;" disabled>
+					<input id="let_en_6" type="text" class="uk-input uk-form-width-small uk-form-small" value='"f", "ph"'><br>
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="g" style="text-align:center;" disabled>
+					<input id="let_en_7" type="text" class="uk-input uk-form-width-small uk-form-small" value='"g", "j"'><br>
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="h" style="text-align:center;" disabled>
+					<input id="let_en_8" type="text" class="uk-input uk-form-width-small uk-form-small" value='"h", "kh", "x"'><br>
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="i" style="text-align:center;" disabled>
+					<input id="let_en_9" type="text" class="uk-input uk-form-width-small uk-form-small" value='"i", "yi", "ii"'><br>
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="j" style="text-align:center;" disabled>
+					<input id="let_en_10" type="text" class="uk-input uk-form-width-small uk-form-small" value='"j", "g", "zh"'><br>
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="k" style="text-align:center;" disabled>
+					<input id="let_en_11" type="text" class="uk-input uk-form-width-small uk-form-small" value='"k", "c"'><br>
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="l" style="text-align:center;" disabled>
+					<input id="let_en_12" type="text" class="uk-input uk-form-width-small uk-form-small" value='"l", "I"'><br>
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="m" style="text-align:center;" disabled>
+					<input id="let_en_13" type="text" class="uk-input uk-form-width-small uk-form-small" value='"m", "rn", "nn"'><br>
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="n" style="text-align:center;" disabled>
+					<input id="let_en_14" type="text" class="uk-input uk-form-width-small uk-form-small" value='"n"'><br>
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="o" style="text-align:center;" disabled>
+					<input id="let_en_15" type="text" class="uk-input uk-form-width-small uk-form-small" value='"o", "0"'><br>
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="p" style="text-align:center;" disabled>
+					<input id="let_en_16" type="text" class="uk-input uk-form-width-small uk-form-small" value='"p"'><br>
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="q" style="text-align:center;" disabled>
+					<input id="let_en_17" type="text" class="uk-input uk-form-width-small uk-form-small" value='"q", "k", "c"'><br>
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="r" style="text-align:center;" disabled>
+					<input id="let_en_18" type="text" class="uk-input uk-form-width-small uk-form-small" value='"r"'><br>
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="s" style="text-align:center;" disabled>
+					<input id="let_en_19" type="text" class="uk-input uk-form-width-small uk-form-small" value='"s", "$", "5"'><br>
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="t" style="text-align:center;" disabled>
+					<input id="let_en_20" type="text" class="uk-input uk-form-width-small uk-form-small" value='"t"'><br>
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="u" style="text-align:center;" disabled>
+					<input id="let_en_21" type="text" class="uk-input uk-form-width-small uk-form-small" value='"u", "y", "yu"'><br>
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="v" style="text-align:center;" disabled>
+					<input id="let_en_22" type="text" class="uk-input uk-form-width-small uk-form-small" value='"v", "w", "vv", "u"'><br>
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="w" style="text-align:center;" disabled>
+					<input id="let_en_23" type="text" class="uk-input uk-form-width-small uk-form-small" value='"w", "v", "vv", "u"'><br>
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="x" style="text-align:center;" disabled>
+					<input id="let_en_24" type="text" class="uk-input uk-form-width-small uk-form-small" value='"x", "kh", "h"'><br>
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="y" style="text-align:center;" disabled>
+					<input id="let_en_25" type="text" class="uk-input uk-form-width-small uk-form-small" value='"y", "u", "yu"'><br>
+					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="z" style="text-align:center;" disabled>
+					<input id="let_en_26" type="text" class="uk-input uk-form-width-small uk-form-small" value='"z", "zz"'><br>
+				</td>
+			</tr>
+		</table>
+		</div>
+    </div>
+</div>
+
+<div id="donate" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <h2 class="uk-modal-title">Поддержать разработчика</h2>
+		<p><b>QIWI Wallet:</b>
+		<button class="uk-button uk-button-default uk-button-small uk-margin-small-left" onclick="window.open('https://qiwi.com/payment/form/99?extra%5B%27account%27%5D=79855045064');">Donate</button></p>
+		<p><b>Яндекс.Деньги:</b>
+		<button class="uk-button uk-button-default uk-button-small uk-margin-small-left" onclick="window.open('https://money.yandex.ru/to/41001486455974');">Donate</button></p>
+		<p><b>WebMoney:</b> Z159506078728 или R321443171717</p>
+    </div>
+</div>
+</body>
+</html>
