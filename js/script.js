@@ -4,6 +4,11 @@ var house_prefixes = [];
 var apartment_prefixes = [];
 var separators = [];
 
+const letters = [
+	"а", "б", "в", "г", "д", "е", "ё", "ж", "з", "и", "й", "к", "л", "м", "н", "о", "п", "р", "с", "т", "у", "ф", "х", "ц", "ч", "ш", "щ", "ъ", "ы", "ь", "э", "ю", "я",
+	"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
+];
+
 function shuffle(array) {
 	var currentIndex = array.length, temporaryValue, randomIndex;
 	while (0 !== currentIndex) {
@@ -136,67 +141,9 @@ function update_settings() {
 	house_prefixes = load_data("house_prefixes");
 	apartment_prefixes = load_data("apartment_prefixes");
 	separators = load_data("separators");
-	
-	alph["а"] = load_data("let_ru_1");
-	alph["б"] = load_data("let_ru_2");
-	alph["в"] = load_data("let_ru_3");
-	alph["г"] = load_data("let_ru_4");
-	alph["д"] = load_data("let_ru_5");
-	alph["е"] = load_data("let_ru_6");
-	alph["ё"] = load_data("let_ru_7");
-	alph["ж"] = load_data("let_ru_8");
-	alph["з"] = load_data("let_ru_9");
-	alph["и"] = load_data("let_ru_10");
-	alph["й"] = load_data("let_ru_11");
-	alph["к"] = load_data("let_ru_12");
-	alph["л"] = load_data("let_ru_13");
-	alph["м"] = load_data("let_ru_14");
-	alph["н"] = load_data("let_ru_15");
-	alph["о"] = load_data("let_ru_16");
-	alph["п"] = load_data("let_ru_17");
-	alph["р"] = load_data("let_ru_18");
-	alph["с"] = load_data("let_ru_19");
-	alph["т"] = load_data("let_ru_20");
-	alph["у"] = load_data("let_ru_21");
-	alph["ф"] = load_data("let_ru_22");
-	alph["х"] = load_data("let_ru_23");
-	alph["ц"] = load_data("let_ru_24");
-	alph["ч"] = load_data("let_ru_25");
-	alph["ш"] = load_data("let_ru_26");
-	alph["щ"] = load_data("let_ru_27");
-	alph["ъ"] = load_data("let_ru_28");
-	alph["ы"] = load_data("let_ru_29");
-	alph["ь"] = load_data("let_ru_30");
-	alph["э"] = load_data("let_ru_31");
-	alph["ю"] = load_data("let_ru_32");
-	alph["я"] = load_data("let_ru_33");
-	
-	alph["a"] = load_data("let_en_1");
-	alph["b"] = load_data("let_en_2");
-	alph["c"] = load_data("let_en_3");
-	alph["d"] = load_data("let_en_4");
-	alph["e"] = load_data("let_en_5");
-	alph["f"] = load_data("let_en_6");
-	alph["g"] = load_data("let_en_7");
-	alph["h"] = load_data("let_en_8");
-	alph["i"] = load_data("let_en_9");
-	alph["j"] = load_data("let_en_10");
-	alph["k"] = load_data("let_en_11");
-	alph["l"] = load_data("let_en_12");
-	alph["m"] = load_data("let_en_13");
-	alph["n"] = load_data("let_en_14");
-	alph["o"] = load_data("let_en_15");
-	alph["p"] = load_data("let_en_16");
-	alph["q"] = load_data("let_en_17");
-	alph["r"] = load_data("let_en_18");
-	alph["s"] = load_data("let_en_19");
-	alph["t"] = load_data("let_en_20");
-	alph["u"] = load_data("let_en_21");
-	alph["v"] = load_data("let_en_22");
-	alph["w"] = load_data("let_en_23");
-	alph["x"] = load_data("let_en_24");
-	alph["y"] = load_data("let_en_25");
-	alph["z"] = load_data("let_en_26");
+	for(let letter = 0; letter < letters.length; letter++){
+		alph[letters[letter]] = load_data("let_"+(letter < 33 ? 'ru' : 'en')+"_"+(letter < 33 ? (letter+1) : (letter-32)));
+	}
 }
 
 
@@ -209,66 +156,9 @@ function prepare_json(data) {
 
 function prepare_alph(data) {
 	prepared = {}
-	prepared["а"] = prepare_json(alph["а"]);
-	prepared["б"] = prepare_json(alph["б"]);
-	prepared["в"] = prepare_json(alph["в"]);
-	prepared["г"] = prepare_json(alph["г"]);
-	prepared["д"] = prepare_json(alph["д"]);
-	prepared["е"] = prepare_json(alph["е"]);
-	prepared["ё"] = prepare_json(alph["ё"]);
-	prepared["ж"] = prepare_json(alph["ж"]);
-	prepared["з"] = prepare_json(alph["з"]);
-	prepared["и"] = prepare_json(alph["и"]);
-	prepared["й"] = prepare_json(alph["й"]);
-	prepared["к"] = prepare_json(alph["к"]);
-	prepared["л"] = prepare_json(alph["л"]);
-	prepared["м"] = prepare_json(alph["м"]);
-	prepared["н"] = prepare_json(alph["н"]);
-	prepared["о"] = prepare_json(alph["о"]);
-	prepared["п"] = prepare_json(alph["п"]);
-	prepared["р"] = prepare_json(alph["р"]);
-	prepared["с"] = prepare_json(alph["с"]);
-	prepared["т"] = prepare_json(alph["т"]);
-	prepared["у"] = prepare_json(alph["у"]);
-	prepared["ф"] = prepare_json(alph["ф"]);
-	prepared["х"] = prepare_json(alph["х"]);
-	prepared["ц"] = prepare_json(alph["ц"]);
-	prepared["ч"] = prepare_json(alph["ч"]);
-	prepared["ш"] = prepare_json(alph["ш"]);
-	prepared["щ"] = prepare_json(alph["щ"]);
-	prepared["ъ"] = prepare_json(alph["ъ"]);
-	prepared["ы"] = prepare_json(alph["ы"]);
-	prepared["ь"] = prepare_json(alph["ь"]);
-	prepared["э"] = prepare_json(alph["э"]);
-	prepared["ю"] = prepare_json(alph["ю"]);
-	prepared["я"] = prepare_json(alph["я"]);
-	
-	prepared["a"] = prepare_json(alph["a"]);
-	prepared["b"] = prepare_json(alph["b"]);
-	prepared["c"] = prepare_json(alph["c"]);
-	prepared["d"] = prepare_json(alph["d"]);
-	prepared["e"] = prepare_json(alph["e"]);
-	prepared["f"] = prepare_json(alph["f"]);
-	prepared["g"] = prepare_json(alph["g"]);
-	prepared["h"] = prepare_json(alph["h"]);
-	prepared["i"] = prepare_json(alph["i"]);
-	prepared["j"] = prepare_json(alph["j"]);
-	prepared["k"] = prepare_json(alph["k"]);
-	prepared["l"] = prepare_json(alph["l"]);
-	prepared["m"] = prepare_json(alph["m"]);
-	prepared["n"] = prepare_json(alph["n"]);
-	prepared["o"] = prepare_json(alph["o"]);
-	prepared["p"] = prepare_json(alph["p"]);
-	prepared["q"] = prepare_json(alph["q"]);
-	prepared["r"] = prepare_json(alph["r"]);
-	prepared["s"] = prepare_json(alph["s"]);
-	prepared["t"] = prepare_json(alph["t"]);
-	prepared["u"] = prepare_json(alph["u"]);
-	prepared["v"] = prepare_json(alph["v"]);
-	prepared["w"] = prepare_json(alph["w"]);
-	prepared["x"] = prepare_json(alph["x"]);
-	prepared["y"] = prepare_json(alph["y"]);
-	prepared["z"] = prepare_json(alph["z"]);
+	for(let letter = 0; letter < letters.length; letter++){
+		prepared[letters[letter]] = prepare_json(alph[letters[letter]]);
+	}	
 	
 	return prepared;
 }
@@ -327,66 +217,10 @@ function open_file(input) {
 	reader.onload = function() {
 		res = reader.result;
 		res = JSON.parse(res);
-		document.getElementById("let_ru_1").value = read_array(res.alph.а);
-		document.getElementById("let_ru_2").value = read_array(res.alph.б);
-		document.getElementById("let_ru_3").value = read_array(res.alph.в);
-		document.getElementById("let_ru_4").value = read_array(res.alph.г);
-		document.getElementById("let_ru_5").value = read_array(res.alph.д);
-		document.getElementById("let_ru_6").value = read_array(res.alph.е);
-		document.getElementById("let_ru_7").value = read_array(res.alph.ё);
-		document.getElementById("let_ru_8").value = read_array(res.alph.ж);
-		document.getElementById("let_ru_9").value = read_array(res.alph.з);
-		document.getElementById("let_ru_10").value = read_array(res.alph.и);
-		document.getElementById("let_ru_11").value = read_array(res.alph.й);
-		document.getElementById("let_ru_12").value = read_array(res.alph.к);
-		document.getElementById("let_ru_13").value = read_array(res.alph.л);
-		document.getElementById("let_ru_14").value = read_array(res.alph.м);
-		document.getElementById("let_ru_15").value = read_array(res.alph.н);
-		document.getElementById("let_ru_16").value = read_array(res.alph.о);
-		document.getElementById("let_ru_17").value = read_array(res.alph.п);
-		document.getElementById("let_ru_18").value = read_array(res.alph.р);
-		document.getElementById("let_ru_19").value = read_array(res.alph.с);
-		document.getElementById("let_ru_20").value = read_array(res.alph.т);
-		document.getElementById("let_ru_21").value = read_array(res.alph.у);
-		document.getElementById("let_ru_22").value = read_array(res.alph.ф);
-		document.getElementById("let_ru_23").value = read_array(res.alph.х);
-		document.getElementById("let_ru_24").value = read_array(res.alph.ц);
-		document.getElementById("let_ru_25").value = read_array(res.alph.ч);
-		document.getElementById("let_ru_26").value = read_array(res.alph.ш);
-		document.getElementById("let_ru_27").value = read_array(res.alph.щ);
-		document.getElementById("let_ru_28").value = read_array(res.alph.ъ);
-		document.getElementById("let_ru_29").value = read_array(res.alph.ы);
-		document.getElementById("let_ru_30").value = read_array(res.alph.ь);
-		document.getElementById("let_ru_31").value = read_array(res.alph.э);
-		document.getElementById("let_ru_32").value = read_array(res.alph.ю);
-		document.getElementById("let_ru_33").value = read_array(res.alph.я);
 		
-		document.getElementById("let_en_1").value = read_array(res.alph.a);
-		document.getElementById("let_en_2").value = read_array(res.alph.b);
-		document.getElementById("let_en_3").value = read_array(res.alph.c);
-		document.getElementById("let_en_4").value = read_array(res.alph.d);
-		document.getElementById("let_en_5").value = read_array(res.alph.e);
-		document.getElementById("let_en_6").value = read_array(res.alph.f);
-		document.getElementById("let_en_7").value = read_array(res.alph.g);
-		document.getElementById("let_en_8").value = read_array(res.alph.h);
-		document.getElementById("let_en_9").value = read_array(res.alph.i);
-		document.getElementById("let_en_10").value = read_array(res.alph.j);
-		document.getElementById("let_en_11").value = read_array(res.alph.k);
-		document.getElementById("let_en_12").value = read_array(res.alph.l);
-		document.getElementById("let_en_13").value = read_array(res.alph.m);
-		document.getElementById("let_en_14").value = read_array(res.alph.n);
-		document.getElementById("let_en_15").value = read_array(res.alph.o);
-		document.getElementById("let_en_16").value = read_array(res.alph.p);
-		document.getElementById("let_en_17").value = read_array(res.alph.q);
-		document.getElementById("let_en_18").value = read_array(res.alph.r);
-		document.getElementById("let_en_19").value = read_array(res.alph.s);
-		document.getElementById("let_en_20").value = read_array(res.alph.t);
-		document.getElementById("let_en_21").value = read_array(res.alph.u);
-		document.getElementById("let_en_22").value = read_array(res.alph.v);
-		document.getElementById("let_en_23").value = read_array(res.alph.w);
-		document.getElementById("let_en_24").value = read_array(res.alph.x);
-		document.getElementById("let_en_25").value = read_array(res.alph.y);
-		document.getElementById("let_en_26").value = read_array(res.alph.z);
+		for(let letter = 0; letter < letters.length; letter++){
+			document.getElementById("let_"+(letter < 33 ? 'ru' : 'en')+"_"+(letter < 33 ? (letter+1) : (letter-32))).value = read_array(res.alph[letters[letter]]);
+		}
 		
 		document.getElementById("street_prefixes").value = read_array(res.street_prefixes);
 		document.getElementById("house_prefixes").value = read_array(res.house_prefixes);
