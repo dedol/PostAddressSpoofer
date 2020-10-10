@@ -1,383 +1,1067 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-	<meta charset="utf-8">
-	<title>Post Address Spoofer</title>
-	<link rel="icon" type="image/png" href="favicon.png">
-	<link rel="stylesheet" href="css/uikit.css" />
-	<script src="js/uikit.min.js"></script>
-	<script src="js/uikit-icons.min.js"></script>
-	<script src="js/script.js" type="text/javascript"></script>
-	<!-- Yandex.Metrika counter -->
-	<script type="text/javascript" >
-	   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-	   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-	   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	   ym(66656449, "init", {
-			clickmap:true,
-			trackLinks:true,
-			accurateTrackBounce:true
-	   });
-	</script>
-	<noscript><div><img src="https://mc.yandex.ru/watch/66656449" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-	<!-- /Yandex.Metrika counter -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+
+    <title>Post Address Spoofer</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <script type="text/javascript" src="js/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
-<body>
-<nav class="uk-navbar-container uk-margin" uk-navbar>
-    <div class="uk-navbar-left">
-        <a class="uk-navbar-item uk-logo uk-margin-small-left" href="#">Post Address Spoofer (beta)</a>
-    </div>
-	
-	<div class="uk-navbar-right">
-		<div class="uk-navbar-item">
-			<button class="uk-button uk-button-default uk-button-medium" onclick="window.open('https://github.com/dedol/PostAddressSpoofer');">
-				<!-- <span uk-icon="icon: star"></span>  -->
-				GitHub
-			</button>
+<body class="min-width-460-sm">
+
+    <!-- CHANGELOG Modal -->
+    <div class="modal fade" id="changelog_modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title ml-3">Список изменений</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                <div id="accordion">
+                                    <div class="card">
+                                        <div class="card-header pt-1 pb-1 pl-2 pr-2" id="card_2">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link" data-toggle="collapse" data-target="#v_1_0_0" aria-expanded="true" aria-controls="v_1_0_0">
+                                                    Версия 1.0.0
+                                                </button>
+                                                <span class="badge badge-primary badge-pill float-right mt-2">10 Oct 2020</span>
+                                            </h5>
+                                        </div>
+                                        <div id="v_1_0_0" class="collapse show" aria-labelledby="card_2" data-parent="#accordion">
+                                            <div class="card-body">
+                                                <ul>
+                                                    <li>Переработан интерфейс для корректного отображения на экранах любых размеров</li>
+                                                    <li>Добавлены профили данных и профили настроек, введенные значения автоматически сохраняются в браузере и будут доступны при следующем использовании</li>
+                                                    <li>Добавлена зацикленная коверка для полей дома и квартиры</li>
+                                                    <li>Добавлена возможность использования своего формата вывода результатов</li>
+                                                    <li>Добавлен генератор для одного слова (пункт Generator в меню)</li>
+                                                    <li>Добавлена возможность импорта/экспорта рабочего пространства, всех сохраненных в браузере адресов и настроек работы (пункт Workspace в меню)</li>
+                                                    <li>Поддерживается импорт настроек из файла, созданного в прошлой версии инструмента</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header pt-1 pb-1 pl-2 pr-2" id="card_1">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#v_beta" aria-expanded="false" aria-controls="v_beta">
+                                                    Версия beta
+                                                </button>
+                                                <span class="badge badge-primary badge-pill float-right mt-2">7 Sep 2020</span>
+                                            </h5>
+                                        </div>
+                                        <div id="v_beta" class="collapse" aria-labelledby="card_1" data-parent="#accordion">
+                                            <div class="card-body">
+                                                <ul>
+                                                    <li>Настройка вариантов написания для каждой буквы</li>
+                                                    <li>Настройка префиксов для улицы, дома и квартиры</li>
+                                                    <li>Экспорт/импорт настроек в файл (то есть один раз настраиваем для себя, сохраняем в файл, и при следующем использовании загружаем этот файл)</li>
+                                                </ul>
+                                                <div class="text-center">
+                                                    <a class="btn btn-secondary" href="http://dedol.ru/pas/versions/beta/">Переключиться на эту версию</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-	
-		<div class="uk-navbar-item">
-			<button class="uk-button uk-button-default uk-button-medium" onclick="window.open('https://miped.ru/f/threads/koverkatel-adresa-post-address-spoofer.115099/');">
-				<!-- <span uk-icon="icon: git-fork"></span>  -->
-				Miped
-			</button>
+    </div>
+
+    <!-- FEEDBACK Modal -->
+    <div class="modal fade" id="feedback_modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title ml-3">Обратная связь</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                <p>Обсуждение и новости о проекте на форуме: <a href="https://miped.ru/f/threads/koverkatel-adresa-post-address-spoofer.115099/" target="_blank">Miped</a></p>
+                                <p>Связь с разработчиком: <a href="https://t.me/dedol" target="_blank">Telegram</a> или <a href="https://miped.ru/f/members/dedol.3848/" target="_blank">Miped</a></p>
+                                <p class="mb-1">Для желающих материально поддержать проект:</p>
+                                <ul>
+                                    <li>
+                                        QIWI Wallet: <a href="https://qiwi.com/payment/form/99?extra%5B%27account%27%5D=79855045064" target="_blank">+79855045064</a>
+                                    </li>
+                                    <li>
+                                        Яндекс.Деньги: <a href="https://money.yandex.ru/to/41001486455974" target="_blank">41001486455974</a>
+                                    </li>
+                                    <li>
+                                        WebMoney: Z159506078728 или R321443171717
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-		
-		<div class="uk-navbar-item">
-			<button class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #donate">
-				<!-- <span uk-icon="icon: credit-card"></span>  -->
-				Поддержать
-			</button>
-		</div>
-	</div>
-</nav>
+    </div>
 
-<div class="uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid>
-    <div align="center">
-        <table border=0>
-		<tr>
-			<td class="uk-table-shrink"></td>
-			<td class="uk-table-shrink" align="center">Значение</td>
-			<td class="uk-table-shrink" align="center">Уникальность</td>
-		</tr>
-		<tr>
-			<td class="uk-table-shrink"><div class="uk-margin-small-left uk-margin-small-right">Фамилия:</div></td>
-			<td class="uk-table-shrink"><input class="uk-input uk-form-width-small uk-form-small" id="lastname" type="text" value="Пушкин"></td>
-			<td class="uk-table-shrink">
-				<select class="uk-select uk-form-small" id="lastname_distance">
-					<option value="1">Низкая</option>
-					<option value="2" selected>Средняя</option>
-					<option value="3">Высокая</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td class="uk-table-shrink"><div class="uk-margin-small-left uk-margin-small-right">Имя:</div></td>
-			<td class="uk-table-shrink"><input class="uk-input uk-form-width-small uk-form-small" id="firstname" type="text" value="Александр"></td>
-			<td class="uk-table-shrink">
-				<select class="uk-select uk-form-small" id="firstname_distance">
-					<option value="1">Низкая</option>
-					<option value="2" selected>Средняя</option>
-					<option value="3">Высокая</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td class="uk-table-shrink"><div class="uk-margin-small-left uk-margin-small-right">Отчество:</div></td>
-			<td class="uk-table-shrink"><input class="uk-input uk-form-width-small uk-form-small" id="middlename" type="text" value="Сергеевич"></td>
-			<td class="uk-table-shrink">
-				<select class="uk-select uk-form-small" id="middlename_distance">
-					<option value="1">Низкая</option>
-					<option value="2" selected>Средняя</option>
-					<option value="3">Высокая</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="3" class="uk-table-shrink">
-				<div class="uk-margin-small-left uk-margin-small-right">
-					<label><input class="uk-checkbox" type="checkbox" id="disable_middlename"> Не использовать отчество</label>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="3" class="uk-table-shrink">
-				<div class="uk-margin-small-left uk-margin-small-right">
-					<label><input class="uk-checkbox" type="checkbox" id="disable_mix"> Не перемешивать порядок</label>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="3" class="uk-table-shrink">
-				<div class="uk-margin-small-left uk-margin-small-right">
-					<label><input class="uk-checkbox" type="checkbox" id="is_title"> Первые буквы заглавные</label>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="3" class="uk-table-shrink" align="center">
-				<div class="uk-margin-small-left uk-margin-small-right uk-margin-small-top uk-margin-small-bottom">
-					<button class="uk-button uk-button-primary uk-button-small" OnClick="generate_name();">Генерировать</button>
-				</div>
-			</td>
-		</tr>
-		</table>
-		<div class="uk-margin-small-left uk-margin-small-right">
-			<textarea class="uk-textarea" rows="10" cols="45" name="text" id="result_name"></textarea>
-		</div>
-    </div>
-	
-    <div align="center">
-        <table border=0>
-		<tr>
-			<td class="uk-table-shrink"></td>
-			<td class="uk-table-shrink" align="center">Значение</td>
-			<td class="uk-table-shrink" align="center">Уникальность</td>
-		</tr>
-		<tr>
-			<td class="uk-table-shrink"><div class="uk-margin-small-left uk-margin-small-right">Улица:</div></td>
-			<td class="uk-table-shrink"><input class="uk-input uk-form-width-small uk-form-small" id="streetname" type="text" value="Пушкина"></td>
-			<td class="uk-table-shrink">
-				<select class="uk-select uk-form-small" id="streetname_distance">
-					<option value="1">Низкая</option>
-					<option value="2" selected>Средняя</option>
-					<option value="3">Высокая</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td class="uk-table-shrink"><div class="uk-margin-small-left uk-margin-small-right">Дом:</div></td>
-			<td class="uk-table-shrink"><input class="uk-input uk-form-width-small uk-form-small" id="house_number" type="text" value="12/2"></td>
-			<td class="uk-table-shrink"></td>
-		</tr>
-		<tr>			
-			<td class="uk-table-shrink"><div class="uk-margin-small-left uk-margin-small-right">Квартира:</div></td>
-			<td class="uk-table-shrink"><input class="uk-input uk-form-width-small uk-form-small" id="apartment_number" type="text" value="88"></td>
-			<td class="uk-table-shrink"></td>
-		</tr>
-		<tr>
-			<td colspan="3" class="uk-table-shrink">
-				<div class="uk-margin-small-left uk-margin-small-right">
-					<label><input class="uk-checkbox" type="checkbox" id="disable_apartment"> Не использовать квартиру</label>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="3" class="uk-table-shrink">
-				<div class="uk-margin-small-left uk-margin-small-right">
-					<label><input class="uk-checkbox" type="checkbox" id="is_title_street"> Улица с заглавной буквы</label>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="3" class="uk-table-shrink">
-				<div class="uk-margin-small-left uk-margin-small-right">
-					<label><input class="uk-checkbox" type="checkbox" id="disable_separators"> Не использовать разделители</label>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="3" class="uk-table-shrink" align="center">
-				<div class="uk-margin-small-left uk-margin-small-right uk-margin-small-top uk-margin-small-bottom">
-					<button class="uk-button uk-button-primary uk-button-small" OnClick="generate_address();">Генерировать</button>
-				</div>
-			</td>
-		</tr>
-		</table>
-		<div class="uk-margin-small-left">
-			<textarea class="uk-textarea" rows="10" cols="45" name="text" id="result_address"></textarea>
-		</div>
-    </div>
-    <div>
-		<div class="uk-margin-small-left uk-margin-small-right uk-margin-small-top uk-margin-small-bottom">
-			<b>Настройки словаря:</b>
-		</div>
-		<div id="alph_settings" style="display: block;">
-			<div class="uk-margin-small-left uk-margin-small-right uk-margin-small-top uk-margin-small-bottom">
-				<button class="uk-button uk-button-primary uk-button-small" OnClick="create_file_input();">Открыть</button>
-				<button class="uk-button uk-button-primary uk-button-small" OnClick="save_settings_file();">Сохранить</button>
-			</div>
-			
-			<table>
-				<tr>
-					<td colspan="2">
-						<div class="uk-margin-small-left uk-margin-small-right"><b>Настройка префиксов:</b></div>
-					</td></tr>
-				<tr>
-					<td>
-						<div class="uk-margin-small-left uk-margin-small-right">Улица:</div>
-					</td>
-					<td>
-						<input class="uk-input uk-form-width-medium uk-form-small" id="street_prefixes" type="text" value='"ul", "street", "yl", "st", "ulitca"'>
-					</td>
-				</tr>
-				<tr>
-					<td><div class="uk-margin-small-left uk-margin-small-right">Дом:</div></td>
-					<td>
-						<input class="uk-input uk-form-width-medium uk-form-small" id="house_prefixes" type="text" value='"dom", "house", "d", ""'>
-					</td>
-				</tr>
-				<tr>
-					<td><div class="uk-margin-small-left uk-margin-small-right">Квартира:</div></td>
-					<td>
-						<input class="uk-input uk-form-width-medium uk-form-small" id="apartment_prefixes" type="text" value='"kv", "k", "kvartira", ""'>
-					</td>
-				</tr>
-				<tr>
-					<td><div class="uk-margin-small-left uk-margin-small-right">Разделители:</div></td>
-					<td>
-						<input class="uk-input uk-form-width-medium uk-form-small" id="separators" type="text" value='"{comma}"'>
-					</td>
-				</tr>
-			</table>
+    <!-- ALPH Modal -->
+    <div class="modal fade" id="alph" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title ml-3">Настройки алфавита</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_1-label">а:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_1" aria-describedby="let_ru_1-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_1-label">a:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_1" aria-describedby="let_en_1-label">
+                                </div>
+                            </div>
+                        </div>
 
-			<table style="white-space: nowrap;">
-				<tr>
-					<td colspan="1">
-						<div class="uk-margin-small-left uk-margin-small-right uk-margin-small-top"><b>Настройка алфавита:</b></div>
-					</td>
-				</tr>
-				<tr><td>
-					<div class="uk-margin-small-left uk-margin-small-right uk-margin-small-bottom" >
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="а" style="text-align:center;" disabled>
-						<input id="let_ru_1" type="text" class="uk-input uk-form-width-small uk-form-small" value='"a"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="б" style="text-align:center;" disabled>
-						<input id="let_ru_2" type="text" class="uk-input uk-form-width-small uk-form-small" value='"b", "6"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="в" style="text-align:center;" disabled>
-						<input id="let_ru_3" type="text" class="uk-input uk-form-width-small uk-form-small" value='"v", "w", "vv", "u"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="г" style="text-align:center;" disabled>
-						<input id="let_ru_4" type="text" class="uk-input uk-form-width-small uk-form-small" value='"g", "j"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="д" style="text-align:center;" disabled>
-						<input id="let_ru_5" type="text" class="uk-input uk-form-width-small uk-form-small" value='"d"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="е" style="text-align:center;" disabled>
-						<input id="let_ru_6" type="text" class="uk-input uk-form-width-small uk-form-small" value='"e", "ye"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="ё" style="text-align:center;" disabled>
-						<input id="let_ru_7" type="text" class="uk-input uk-form-width-small uk-form-small" value='"e", "yo", "jo"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="ж" style="text-align:center;" disabled>
-						<input id="let_ru_8" type="text" class="uk-input uk-form-width-small uk-form-small" value='"zh", "j", "z"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="з" style="text-align:center;" disabled>
-						<input id="let_ru_9" type="text" class="uk-input uk-form-width-small uk-form-small" value='"z", "zz"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="и" style="text-align:center;" disabled>
-						<input id="let_ru_10" type="text" class="uk-input uk-form-width-small uk-form-small" value='"i", "yi"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="й" style="text-align:center;" disabled>
-						<input id="let_ru_11" type="text" class="uk-input uk-form-width-small uk-form-small" value='"y", "i", "yi", "j", "jj", "ii"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="к" style="text-align:center;" disabled>
-						<input id="let_ru_12" type="text" class="uk-input uk-form-width-small uk-form-small" value='"k", "c"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="л" style="text-align:center;" disabled>
-						<input id="let_ru_13" type="text" class="uk-input uk-form-width-small uk-form-small" value='"l", "I"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="м" style="text-align:center;" disabled>
-						<input id="let_ru_14" type="text" class="uk-input uk-form-width-small uk-form-small" value='"m", "rn", "nn"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="н" style="text-align:center;" disabled>
-						<input id="let_ru_15" type="text" class="uk-input uk-form-width-small uk-form-small" value='"n"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="о" style="text-align:center;" disabled>
-						<input id="let_ru_16" type="text" class="uk-input uk-form-width-small uk-form-small" value='"o", "0"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="п" style="text-align:center;" disabled>
-						<input id="let_ru_17" type="text" class="uk-input uk-form-width-small uk-form-small" value='"p"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="р" style="text-align:center;" disabled>
-						<input id="let_ru_18" type="text" class="uk-input uk-form-width-small uk-form-small" value='"r"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="с" style="text-align:center;" disabled>
-						<input id="let_ru_19" type="text" class="uk-input uk-form-width-small uk-form-small" value='"s", "$", "5"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="т" style="text-align:center;" disabled>
-						<input id="let_ru_20" type="text" class="uk-input uk-form-width-small uk-form-small" value='"t"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="у" style="text-align:center;" disabled>
-						<input id="let_ru_21" type="text" class="uk-input uk-form-width-small uk-form-small" value='"u", "y", "yu"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="ф" style="text-align:center;" disabled>
-						<input id="let_ru_22" type="text" class="uk-input uk-form-width-small uk-form-small" value='"f", "ph"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="х" style="text-align:center;" disabled>
-						<input id="let_ru_23" type="text" class="uk-input uk-form-width-small uk-form-small" value='"kh", "x", "h"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="ц" style="text-align:center;" disabled>
-						<input id="let_ru_24" type="text" class="uk-input uk-form-width-small uk-form-small" value='"ts", "c", "tc", "cz", "cc"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="ч" style="text-align:center;" disabled>
-						<input id="let_ru_25" type="text" class="uk-input uk-form-width-small uk-form-small" value='"ch", "c"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="ш" style="text-align:center;" disabled>
-						<input id="let_ru_26" type="text" class="uk-input uk-form-width-small uk-form-small" value='"sh", "s", "h"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="щ" style="text-align:center;" disabled>
-						<input id="let_ru_27" type="text" class="uk-input uk-form-width-small uk-form-small" value='"shch", "shh", "sh", "sc"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="ъ" style="text-align:center;" disabled>
-						<input id="let_ru_28" type="text" class="uk-input uk-form-width-small uk-form-small" value='"&#39", ""'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="ы" style="text-align:center;" disabled>
-						<input id="let_ru_29" type="text" class="uk-input uk-form-width-small uk-form-small" value='"y", "i"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="ь" style="text-align:center;" disabled>
-						<input id="let_ru_30" type="text" class="uk-input uk-form-width-small uk-form-small" value='""'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="э" style="text-align:center;" disabled>
-						<input id="let_ru_31" type="text" class="uk-input uk-form-width-small uk-form-small" value='"eh", "e"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="ю" style="text-align:center;" disabled>
-						<input id="let_ru_32" type="text" class="uk-input uk-form-width-small uk-form-small" value='"yu", "u", "ju", "iu"'><br>
-						<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="я" style="text-align:center;" disabled>
-						<input id="let_ru_33" type="text" class="uk-input uk-form-width-small uk-form-small" value='"ya", "ja", "ia", "a"'><br>
-					</div>
-				</td>
-				<td valign="top">
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="a" style="text-align:center;" disabled>
-					<input id="let_en_1" type="text" class="uk-input uk-form-width-small uk-form-small" value='"a"'><br>
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="b" style="text-align:center;" disabled>
-					<input id="let_en_2" type="text" class="uk-input uk-form-width-small uk-form-small" value='"b", "6"'><br>
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="c" style="text-align:center;" disabled>
-					<input id="let_en_3" type="text" class="uk-input uk-form-width-small uk-form-small" value='"c", "s", "$", "5"'><br>
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="d" style="text-align:center;" disabled>
-					<input id="let_en_4" type="text" class="uk-input uk-form-width-small uk-form-small" value='"d"'><br>
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="e" style="text-align:center;" disabled>
-					<input id="let_en_5" type="text" class="uk-input uk-form-width-small uk-form-small" value='"e", "ye", "je"'><br>
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="f" style="text-align:center;" disabled>
-					<input id="let_en_6" type="text" class="uk-input uk-form-width-small uk-form-small" value='"f", "ph"'><br>
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="g" style="text-align:center;" disabled>
-					<input id="let_en_7" type="text" class="uk-input uk-form-width-small uk-form-small" value='"g", "j"'><br>
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="h" style="text-align:center;" disabled>
-					<input id="let_en_8" type="text" class="uk-input uk-form-width-small uk-form-small" value='"h", "kh", "x"'><br>
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="i" style="text-align:center;" disabled>
-					<input id="let_en_9" type="text" class="uk-input uk-form-width-small uk-form-small" value='"i", "yi", "ii"'><br>
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="j" style="text-align:center;" disabled>
-					<input id="let_en_10" type="text" class="uk-input uk-form-width-small uk-form-small" value='"j", "g", "zh"'><br>
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="k" style="text-align:center;" disabled>
-					<input id="let_en_11" type="text" class="uk-input uk-form-width-small uk-form-small" value='"k", "c"'><br>
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="l" style="text-align:center;" disabled>
-					<input id="let_en_12" type="text" class="uk-input uk-form-width-small uk-form-small" value='"l", "I"'><br>
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="m" style="text-align:center;" disabled>
-					<input id="let_en_13" type="text" class="uk-input uk-form-width-small uk-form-small" value='"m", "rn", "nn"'><br>
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="n" style="text-align:center;" disabled>
-					<input id="let_en_14" type="text" class="uk-input uk-form-width-small uk-form-small" value='"n"'><br>
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="o" style="text-align:center;" disabled>
-					<input id="let_en_15" type="text" class="uk-input uk-form-width-small uk-form-small" value='"o", "0"'><br>
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="p" style="text-align:center;" disabled>
-					<input id="let_en_16" type="text" class="uk-input uk-form-width-small uk-form-small" value='"p"'><br>
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="q" style="text-align:center;" disabled>
-					<input id="let_en_17" type="text" class="uk-input uk-form-width-small uk-form-small" value='"q", "k", "c"'><br>
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="r" style="text-align:center;" disabled>
-					<input id="let_en_18" type="text" class="uk-input uk-form-width-small uk-form-small" value='"r"'><br>
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="s" style="text-align:center;" disabled>
-					<input id="let_en_19" type="text" class="uk-input uk-form-width-small uk-form-small" value='"s", "$", "5"'><br>
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="t" style="text-align:center;" disabled>
-					<input id="let_en_20" type="text" class="uk-input uk-form-width-small uk-form-small" value='"t"'><br>
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="u" style="text-align:center;" disabled>
-					<input id="let_en_21" type="text" class="uk-input uk-form-width-small uk-form-small" value='"u", "y", "yu"'><br>
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="v" style="text-align:center;" disabled>
-					<input id="let_en_22" type="text" class="uk-input uk-form-width-small uk-form-small" value='"v", "w", "vv", "u"'><br>
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="w" style="text-align:center;" disabled>
-					<input id="let_en_23" type="text" class="uk-input uk-form-width-small uk-form-small" value='"w", "v", "vv", "u"'><br>
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="x" style="text-align:center;" disabled>
-					<input id="let_en_24" type="text" class="uk-input uk-form-width-small uk-form-small" value='"x", "kh", "h"'><br>
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="y" style="text-align:center;" disabled>
-					<input id="let_en_25" type="text" class="uk-input uk-form-width-small uk-form-small" value='"y", "u", "yu"'><br>
-					<input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="z" style="text-align:center;" disabled>
-					<input id="let_en_26" type="text" class="uk-input uk-form-width-small uk-form-small" value='"z", "zz"'><br>
-				</td>
-			</tr>
-		</table>
-		</div>
-    </div>
-</div>
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_2-label">б:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_2" aria-describedby="let_ru_2-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_2-label">b:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_2" aria-describedby="let_en_2-label">
+                                </div>
+                            </div>
+                        </div>
 
-<div id="donate" uk-modal>
-    <div class="uk-modal-dialog uk-modal-body">
-        <button class="uk-modal-close-default" type="button" uk-close></button>
-        <h2 class="uk-modal-title">Поддержать разработчика</h2>
-		<p><b>QIWI Wallet:</b>
-		<button class="uk-button uk-button-default uk-button-small uk-margin-small-left" onclick="window.open('https://qiwi.com/payment/form/99?extra%5B%27account%27%5D=79855045064');">Donate</button></p>
-		<p><b>Яндекс.Деньги:</b>
-		<button class="uk-button uk-button-default uk-button-small uk-margin-small-left" onclick="window.open('https://money.yandex.ru/to/41001486455974');">Donate</button></p>
-		<p><b>WebMoney:</b> Z159506078728 или R321443171717</p>
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_3-label">в:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_3" aria-describedby="let_ru_3-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_3-label">c:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_3" aria-describedby="let_en_3-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_4-label">г:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_4" aria-describedby="let_ru_4-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_4-label">d:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_4" aria-describedby="let_en_4-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_5-label">д:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_5" aria-describedby="let_ru_5-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_5-label">e:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_5" aria-describedby="let_en_5-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_6-label">е:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_6" aria-describedby="let_ru_6-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_6-label">f:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_6" aria-describedby="let_en_6-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_7-label">ё:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_7" aria-describedby="let_ru_7-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_7-label">g:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_7" aria-describedby="let_en_7-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_8-label">ж:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_8" aria-describedby="let_ru_8-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_8-label">h:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_8" aria-describedby="let_en_8-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_9-label">з:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_9" aria-describedby="let_ru_9-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_9-label">i:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_9" aria-describedby="let_en_9-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_10-label">и:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_10" aria-describedby="let_ru_10-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_10-label">j:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_10" aria-describedby="let_en_10-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_11-label">й:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_11" aria-describedby="let_ru_11-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_11-label">k:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_11" aria-describedby="let_en_11-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_12-label">к:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_12" aria-describedby="let_ru_12-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_12-label">l:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_12" aria-describedby="let_en_12-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_13-label">л:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_13" aria-describedby="let_ru_13-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_13-label">m:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_13" aria-describedby="let_en_13-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_14-label">м:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_14" aria-describedby="let_ru_14-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_14-label">n:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_14" aria-describedby="let_en_14-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_15-label">н:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_15" aria-describedby="let_ru_15-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_15-label">o:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_15" aria-describedby="let_en_15-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_16-label">о:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_16" aria-describedby="let_ru_16-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_16-label">p:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_16" aria-describedby="let_en_16-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_17-label">п:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_17" aria-describedby="let_ru_17-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_17-label">q:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_17" aria-describedby="let_en_17-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_18-label">р:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_18" aria-describedby="let_ru_18-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_18-label">r:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_18" aria-describedby="let_en_18-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_19-label">с:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_19" aria-describedby="let_ru_19-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_19-label">s:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_19" aria-describedby="let_en_19-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_20-label">т:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_20" aria-describedby="let_ru_20-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_20-label">t:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_20" aria-describedby="let_en_20-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_21-label">у:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_21" aria-describedby="let_ru_21-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_21-label">u:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_21" aria-describedby="let_en_21-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_22-label">ф:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_22" aria-describedby="let_ru_22-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_22-label">v:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_22" aria-describedby="let_en_22-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_23-label">х:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_23" aria-describedby="let_ru_23-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_23-label">w:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_23" aria-describedby="let_en_23-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_24-label">ц:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_24" aria-describedby="let_ru_24-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_24-label">x:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_24" aria-describedby="let_en_24-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_25-label">ч:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_25" aria-describedby="let_ru_25-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_25-label">y:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_25" aria-describedby="let_en_25-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_26-label">ш:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_26" aria-describedby="let_ru_26-label">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_en_26-label">z:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_en_26" aria-describedby="let_en_26-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_27-label">щ:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_27" aria-describedby="let_ru_27-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_28-label">ъ:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_28" aria-describedby="let_ru_28-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_29-label">ы:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_29" aria-describedby="let_ru_29-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_30-label">ь:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_30" aria-describedby="let_ru_30-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_31-label">э:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_31" aria-describedby="let_ru_31-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_32-label">ю:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_32" aria-describedby="let_ru_32-label">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend w-20">
+                                        <span class="input-group-text w-100" id="let_ru_33-label">я:</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="let_ru_33" aria-describedby="let_ru_33-label">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+
+    <!-- PREFIX Modal -->
+    <div class="modal fade" id="prefixes" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title  ml-3">Настройки префиксов</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="street_prefixes">Префиксы улицы:</label>
+                                    <textarea class="form-control" id="street_prefixes" rows="2"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="house_prefixes">Префиксы дома:</label>
+                                    <textarea class="form-control" id="house_prefixes" rows="2"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="apartment_prefixes">Префиксы квартиры:</label>
+                                    <textarea class="form-control" id="apartment_prefixes" rows="2"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="separators" data-toggle="tooltip" data-html="true" title="Запятая является разделителем элементов, используйте <b>{comma}</b>, чтобы установить запятую внутри элемента">Разделители адреса:
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                            <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                                    </label>
+                                    <textarea class="form-control" id="separators" rows="2"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GENERATOR Modal -->
+    <div class="modal fade" id="generator_modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title ml-3">Генератор для одного слова</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                <p style="text-indent: 1em;">Здесь можно сгенерировать все варианты написания одного слова (например, сгенерировать префиксы). При генерации будут использоваться настройки алфавита активного профиля настроек.</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="input-group mb-2 w-100">
+                                    <input type="text" class="form-control" id="value_mini" aria-describedby="value_mini-label">
+                                    <select class="custom-select col-4" id="value_mini_distance">
+                                        <option disabled>Уникальность:</option>
+                                        <option value="1" selected>Низкая</option>
+                                        <option value="2">Средняя</option>
+                                        <option value="3">Высокая</option>
+                                    </select>
+                                    <div class="input-group-append">
+                                        <button id="generate_mini" class="btn btn-outline-primary">Генерировать</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <textarea class="form-control" id="result_mini" rows="10"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WORKSPACE Modal -->
+    <div class="modal fade" id="workspace" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title ml-3">Импорт/экспорт рабочего пространства</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                <div id="workspace_alert" class="mb-1"></div>
+                                <p style="text-indent: 1em;">Эта функция позвляет импортировать все сохраненные профили данных и настроек. Предполагается, что это будет использоваться для переноса вашего рабочего места в другой браузер или на другой компьютер. Пожалуйста, не делитесь этим файлом, в нем находятся все сохраненные фио и адреса. Для того, чтобы поделиться настройками, сгенерируйте файл <code>settings.json</code>, используя кнопку "Сохранить" в разделе настроек, при этом сохранятся настройки только одного (активного сейчас) профиля.</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group text-right">
+                                    <button class="btn btn-primary" id="workspace_open">Открыть</button>
+                                    <button class="btn btn-primary" id="workspace_save">Сохранить</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary stiky-top">
+        <div class="container-fluid">
+            <a id="navbar-brand" class="navbar-brand" href="#" data-toggle="modal" data-target="#changelog_modal">Post Address Spoofer (v 1.0.0)</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-toggle="modal" data-target="#generator_modal">
+                            Generator
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-toggle="modal" data-target="#workspace">
+                            Workspace
+                        </a>
+                    </li>                    
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-toggle="modal" data-target="#feedback_modal">
+                            Feedback
+                        </a>
+                    </li> 
+                    <li class="nav-item">
+                        <a class="nav-link text-warning font-weight-bold" href="https://github.com/dedol/PostAddressSpoofer/releases" target="_blank">  Download
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container container-fluid row mt-3 pr-0 pl-0 mr-0 ml-0">
+        <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="form-row mb-2">
+                <div class="col-md-6">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend w-25">
+                            <span class="input-group-text w-100" id="lastname-label">Фамилия:</span>
+                        </div>
+                        <input type="text" class="form-control" id="lastname" aria-describedby="lastname-label">
+                        <select class="custom-select col-4" id="lastname_distance">
+                            <option disabled>Уникальность:</option>
+                            <option value="1">Низкая</option>
+                            <option value="2" selected>Средняя</option>
+                            <option value="3">Высокая</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend w-25">
+                            <span class="input-group-text w-100" id="firstname-label">Имя:</span>
+                        </div>
+                        <input type="text" class="form-control" id="firstname" aria-describedby="firstname-label">
+                        <select class="custom-select col-4" id="firstname_distance">
+                            <option disabled>Уникальность:</option>
+                            <option value="1">Низкая</option>
+                            <option value="2" selected>Средняя</option>
+                            <option value="3">Высокая</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend w-25">
+                            <span class="input-group-text w-100" id="middlename-label">Отчество:</span>
+                        </div>
+                        <input type="text" class="form-control" id="middlename" aria-describedby="middlename-label">
+                        <select class="custom-select col-4" id="middlename_distance">
+                            <option disabled>Уникальность:</option>
+                            <option value="1">Низкая</option>
+                            <option value="2" selected>Средняя</option>
+                            <option value="3">Высокая</option>
+                        </select>
+                    </div>
+                    <div class="form-group form-check mb-2">
+                        <input type="checkbox" id="disable_mix">
+                        <label class="form-check-label mb-1" for="disable_mix">Не перемешивать порядок</label>
+                        <br>
+                        <input type="checkbox" id="is_title">
+                        <label class="form-check-label" for="is_title">Первые буквы заглавные</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend w-25">
+                            <span class="input-group-text w-100" id="streetname-label">Улица:</span>
+                        </div>
+                        <input type="text" class="form-control" id="streetname" aria-describedby="streetname-label">
+                        <select class="custom-select col-4" id="streetname_distance">
+                            <option disabled>Уникальность:</option>
+                            <option value="1">Низкая</option>
+                            <option value="2" selected>Средняя</option>
+                            <option value="3">Высокая</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend w-25">
+                            <span class="input-group-text w-100" id="house-label">Дом:</span>
+                        </div>
+                        <input type="text" class="form-control" id="house" aria-describedby="house-label">
+                        <select class="custom-select col-4" id="house_distance">
+                            <option disabled>Уникальность:</option>
+                            <option value="1">Низкая</option>
+                            <option value="2" selected>Средняя</option>
+                            <option value="3">Высокая</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend w-25">
+                            <span class="input-group-text w-100" id="apartment-label">Квартира:</span>
+                        </div>
+                        <input type="text" class="form-control" id="apartment" aria-describedby="apartment-label">
+                        <select class="custom-select col-4" id="apartment_distance">
+                            <option disabled>Уникальность:</option>
+                            <option value="1">Низкая</option>
+                            <option value="2" selected>Средняя</option>
+                            <option value="3">Высокая</option>
+                        </select>
+                    </div>
+                    <div class="form-group form-check mb-2">
+                        <input type="checkbox" id="disable_apartment">
+                        <label class="form-check-label mb-1" for="disable_apartment">Не использовать квартиру</label>
+                        <br>
+                        <input type="checkbox" id="is_title_street">
+                        <label class="form-check-label" for="is_title_street">Улица с заглавной буквы</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row mb-2">
+                <div class="col text-center">
+                    <button type="submit" class="btn btn-primary" id="generate">Генерировать</button>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col">
+                    <div id="alert" class="mb-1"></div>
+                    <div class="form-group">
+                        <textarea class="form-control" id="result" rows="10"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="form-row mb-4">
+                <div class="col">
+                    <label for="profile">Профиль данных:</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend w-35">
+                            <span class="input-group-text w-100" id="profile-label">Профиль:</span>
+                        </div>
+                        <select id="profile" class="custom-select">
+                            <option value="1" selected>Пушкин А.С</option>
+                            <option value="add">Добавить профиль</option>
+                        </select>
+                        <div class="input-group-append">
+                            <button id="delete_profile" class="btn btn-outline-secondary border-left-0">Удалить</button>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend w-35">
+                            <span class="input-group-text w-100" id="profile_name-label">Имя профиля:</span>
+                        </div>
+                        <input type="text" class="form-control w-40" id="profile_name" aria-describedby="profile_name-label">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row mb-4">
+                <div class="col">
+                    <label for="settings">Профиль настроек:</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend w-35">
+                            <span class="input-group-text w-100" id="settings-label">Профиль:</span>
+                        </div>
+                        <select class="custom-select" id="settings">
+                            <option value="1" selected>Default</option>
+                            <option value="add">Добавить профиль</option>
+                        </select>
+                        <div class="input-group-append">
+                            <button id="delete_setting" class="btn btn-outline-secondary border-left-0">Удалить</button>
+                        </div>
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend w-35">
+                            <span class="input-group-text w-100" id="setting_name-label">Имя профиля:</span>
+                        </div>
+                        <input type="text" class="form-control w-40" id="setting_name" aria-describedby="setting_name-label">
+                    </div>
+
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend w-35 mr-0">
+                            <span class="input-group-text w-100 border-right-0" id="setting_name-label">Настройки:</span>
+                        </div>
+                        <div class="input-group-append w-65 ml-0">
+                            <button class="btn btn-outline-secondary w-50 border-right-0" data-toggle="modal" data-target="#alph">Алфавит</button>
+                            <button class="btn btn-outline-secondary w-50 ml-0" data-toggle="modal" data-target="#prefixes">Префиксы</button>
+                        </div>
+                    </div>
+
+                    <div id="setting_alert" class="mb-1"></div>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend w-40 mr-0">
+                            <span class="input-group-text w-100 border-right-0" id="setting_name-label">Импорт/экспорт:</span>
+                        </div>
+                        <div class="input-group-append w-60 ml-0">
+                            <button class="btn btn-outline-secondary w-50 border-right-0" type="button" id="setting_open">Открыть</button>
+                            <button class="btn btn-outline-secondary w-50 ml-0" type="button" id="setting_save">Сохранить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row mb-1">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="output_format" data-toggle="tooltip" data-html="true" title="<b>{person}</b> - строка ФИО<br><b>{address}</b> - строка адреса<br><b>\t</b> - отступ (таб)<br>">Формат вывода:
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                            </svg>
+                        </label>
+                        <textarea class="form-control" id="output_format" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/events.js"></script>
+    <script src="js/profiles.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/workspace.js"></script>
 </body>
 </html>

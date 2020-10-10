@@ -1,0 +1,56 @@
+@media (max-width: 575.98px) { 
+    .min-width-460-sm {
+        min-width: 460px !important;
+        width: 100% !important;
+    }
+
+    .modal-backdrop {
+        width: 576px !important;
+        height: 3000px !important;
+    }
+}
+
+@media (min-width: 1300px) { 
+    .main-container {
+        max-width: 1300px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        width: 100% !important;
+    }
+}
+
+.btn-outline-secondary {
+    border-color: #ced4da;
+}
+
+.form-warning, .form-warning:focus {
+    z-index: 1;
+    border-color: #faa05a;
+    box-shadow: 0 0 0 0.2rem rgba(250,160,90,.25);
+}
+
+.form-invalid, .form-invalid:focus {
+    z-index: 1;
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220,53,69,.25);
+}
+
+.w-20 {
+    width: 20% !important;
+}
+
+.w-35 {
+    width: 35% !important;
+}
+
+.w-40 {
+    width: 40% !important;
+}
+
+.w-60 {
+    width: 60% !important;
+}
+
+.w-65 {
+    width: 65% !important;
+}
