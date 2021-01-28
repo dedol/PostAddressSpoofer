@@ -344,8 +344,11 @@ function generate_name() {
     if (!is_middlename_disabled) middlenames = generate(middlename, middlename_distance);
     streetnames = generate(streetname, streetname_distance);
     houses = generate(house, house_distance)
-    if (!is_apartment_disabled) apartments = generate(apartment, apartment_distance);
-    
+
+    if (!is_apartment_disabled){
+        apartments = generate(apartment, apartment_distance);
+    } else apartments = []
+
     if (!is_middlename_disabled) {
         if (!disable_mix)
             fio_vars = ["{first} {middle} {last}", "{first} {last} {middle}", "{last} {first} {middle}"];
@@ -399,9 +402,7 @@ function generate_name() {
         apartment_string = (apartment_prefix) ? (separator_string + apartment_prefix + " " + apartments[i % apartments.length]) : (separator_string + apartments[i % apartments.length]);
         streetname = (is_title_street) ? (streetnames[i].title()) : (streetnames[i]);
         street_string = (street_prefix) ? (street_prefix + " " + streetname) : (streetname);
-        
         if (is_apartment_disabled) apartment_string = "";
-        
         address = street_string + house_string + apartment_string;
 
         // -------- out format ------
